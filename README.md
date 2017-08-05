@@ -59,6 +59,8 @@ There is a trickier way to use the SSH tunnel. If you forward the SSH port of a 
         environment:
           TUNNEL_HOST: user@publichost:2200
           TUNNEL_REMOTES: "mysql.private.lan:22"
+        expose:
+          - 22
       privatemysql:
         image: rimelek/ssh-tunnel
         volumes:
@@ -115,6 +117,8 @@ I assume you have many different private server. You can shorten the definitions
         environment:
           TUNNEL_HOST: user@publichost:2200
           TUNNEL_REMOTES: "mysql.private.lan:22"
+        expose:
+          - 22
       privatemysql:
         extends:
           service: publicserver
