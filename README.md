@@ -44,7 +44,7 @@ The other case when you have a web server inside a remote private network and yo
             second.remote.host:443
             second.remote.host:80
             
-The "|" (pipe) character allow you to set a multiline text to a variable. If you have multiple host on the remote server, you can list them line by line. Each line is a host and port separated by colon.
+The "|" (pipe) character allows you to set a multiline text to a variable. If you have multiple host on the remote server, you can list them line by line. Each line is a host and port separated by colon.
 
 There is a trickier way to use the SSH tunnel. If you forward the SSH port of a container to a remote SSH port, you can tunnel an other container's port through that. This way you can access a server's local port inside a remote private network which is inaccessible directly via SSH.
 
@@ -148,6 +148,6 @@ I assume you have many different private server. You can shorten the definitions
             web2.private.lan:443
             web2.private.lan:80
             
-In the above case the first container's definition is the base of the others. You need o redefine only the differences.
+In the above case the first container's definition is the base of the others. You need to redefine only the differences.
 
-As you can see it is not so far from a VPN. You have to define more manually, but you get more control over the network leaving the local ports untouched.
+As you can see it is not so far from a VPN. You have to define more manually, but you get more control over the network. Your local private network and some ports of some remote machines from the remote network will be available at the same time. And this is more than a simple SSH tunnel, since your local ports will be untouched if you want.
