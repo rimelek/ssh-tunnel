@@ -3,7 +3,7 @@
 This Docker image helps you forward ports of containers to remote servers.
 If you publish the forwarded ports of a container, you can use it to forward your local ports to the remote server through the container.
 Sometimes the previous way is undesired, since you want to keep the local ports free.
-In this case you should keep /etc/hosts up to date even if the ip addresses of the containers can be changed. This can be solved using [rimelek/hosts-gen](https://hub.docker.com/r/rimelek/hosts-gen/) and [rimelek/hosts-updater](https://hub.docker.com/r/rimelek/hosts-updater/).
+In this case you should keep /etc/hosts up to date even if the ip addresses of the containers can be changed. This can be solved using [itsziget/hosts-gen](https://hub.docker.com/r/itsziget/hosts-gen/) and [itsziget/hosts-updater](https://hub.docker.com/r/itsziget/hosts-updater/).
 With the help of these images you can have a VPN-like solution. So you can even mount a samba drive from a remote private network.
 
 First of all you have to copy your SSH public key to each server you want to ssh. 
@@ -14,7 +14,7 @@ The simplest example when a local port is forwarded to a remote server's local p
     
     services:
       remote-mysql:
-        image: rimelek/ssh-tunnel
+        image: itsziget/ssh-tunnel
         volumes:
           - "${HOME}/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub"
           - "${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa"
@@ -24,7 +24,7 @@ The simplest example when a local port is forwarded to a remote server's local p
           TUNNEL_REMOTES: "127.0.0.1:3306"
           
 In the above example the container's port 3306 is forwarded remotehost's local port 3306 via SSH tunnel through the port 2200.
-If you use the mentioned rimelek/hosts-gen and the updater, you will be able to access to the remote mysql using "remote-mysql" as host name.
+If you use the mentioned itsziget/hosts-gen and the updater, you will be able to access to the remote mysql using "remote-mysql" as host name.
 
 The other case when you have a web server inside a remote private network and you wish to access it from the local machine.
 
@@ -32,7 +32,7 @@ The other case when you have a web server inside a remote private network and yo
     
     services:
       remote-web:
-        image: rimelek/ssh-tunnel
+        image: itsziget/ssh-tunnel
         volumes:
           - "${HOME}/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub"
           - "${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa"
@@ -52,7 +52,7 @@ There is a trickier way to use the SSH tunnel. If you forward the SSH port of a 
     
     services:
       privatemysql-ssh:
-        image: rimelek/ssh-tunnel
+        image: itsziget/ssh-tunnel
         volumes:
           - "${HOME}/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub"
           - "${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa"
@@ -62,7 +62,7 @@ There is a trickier way to use the SSH tunnel. If you forward the SSH port of a 
         expose:
           - 22
       privatemysql:
-        image: rimelek/ssh-tunnel
+        image: itsziget/ssh-tunnel
         volumes:
           - "${HOME}/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub"
           - "${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa"
@@ -81,7 +81,7 @@ As I mentioned at the top of the README, this image is can be used to mount a pr
     
     services:
       privatesamba:
-        image: rimelek/ssh-tunnel
+        image: itsziget/ssh-tunnel
         volumes:
           - "${HOME}/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub"
           - "${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa"
@@ -104,7 +104,7 @@ I assume you have many different private server. You can shorten the definitions
     
     services:
       publicserver:
-        image: rimelek/ssh-tunnel
+        image: itsziget/ssh-tunnel
         volumes:
           - "${HOME}/.ssh/id_rsa.pub:/root/.ssh/id_rsa.pub"
           - "${HOME}/.ssh/id_rsa:/root/.ssh/id_rsa"
